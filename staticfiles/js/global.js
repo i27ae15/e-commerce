@@ -1,1 +1,0 @@
-let authToken = 'No token';
