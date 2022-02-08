@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- basic -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- mobile metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+	<!-- site metas -->
+	<title>Shoes</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	{% load static %}
+	<!-- fontawesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
+	<!-- bootstrap css -->
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<!-- style css -->
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<!-- Responsive-->
+	<link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+	<!-- fevicon -->
+	<link rel="icon" href="{% static 'images/shop_icon.png' %}" />
+	<!-- Scrollbar Custom CSS -->
+	<link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+	<!-- Tweaks for older IEs-->
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+	<!-- owl stylesheets -->
+	<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+		media="screen">
+	{% block local_head %}
+	{% endblock %}
+</head>
+<!-- body -->
+
+{% block local_css %}
+{% endblock %}
+
+<body class="main-layout">
+	<p id="current-section" style="display: none;">{{section}}</p>
+	<!-- header section start -->
+	<div class="header_section">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					
+				</div>
+				<div class="col-sm-9">
+					<nav class="navbar navbar-expand-lg navbar-light bg-light">
+						<button class="navbar-toggler" type="button" data-toggle="collapse"
+							data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+							<div class="navbar-nav">
+								<a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
+								<a class="nav-item nav-link" href="{% url 'shoes' %}">Shoes</a>
+								{% if user.is_authenticated %}
+								<a class="nav-item nav-link" href="{% url 'cart' %}">Cart</a>
+								<a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+								{% else %}
+								<a class="nav-item nav-link" href="{% url 'login' %}">Log in</a>
+								{% endif %}
+
+								<form action="{% url 'shoes' %}" method="post" style="margin-top: 5px;"
+									autocomplete="off">
+									{% csrf_token %}
+									<div class="input-group mb-3">
+										<input type="text" class="form-control" placeholder="Search for a product"
+											aria-label="Recipient's username" aria-describedby="button-addon2"
+											name="query" , id="query">
+
+										<button class="btn btn-outline-secondary" type="submit"
+											id="button-addon2">search</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+		{% block carousel %}
+
+		{% endblock %}
+
+	</div>
+
+	<!-- main block -->
+	{% block main %}
+
+	{% endblock %}
+	<!-- ---------- -->
+
+
+	{% block footer %}
+	<!-- section footer start -->
+	<div class="section_footer">
+		<div class="container">
+			<div class="mail_section">
+				<div class="row">
+					<div class="col-sm-6 col-lg-2">
+						
+					</div>
+					<div class="col-sm-6 col-lg-2">
+					
+					</div>
+					<div class="col-sm-6 col-lg-3">
+						<div class="footer-logo"><img src="{% static 'images/email-icon.png' %}"><span
+								class="map_text">andresruse18@gmail.com</span></div>
+					</div>
+					<div class="col-sm-6 col-lg-3">
+						<div class="social_icon">
+							<ul>
+								<li>
+									<a href="https://github.com/i27ae15/e-commerce.git" style="color: white;">
+										<i class="fab fa-github fa-2x"></i>
+									</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+	<!-- section footer end -->
+	<div class="copyright">2022 All Rights Reserved</div>
+	{% endblock %}
+
+	<!-- Javascript files-->
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/popper.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>bootstrap.bundle.min
+	<script src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
+	<script src="{% static 'js/plugin.js' %}"></script>
+	<!-- sidebar -->
+	<script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+	<script src="{% static 'js/custom.js' %}"></script>
+	<!-- javascript -->
+	<script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+	<script src="{% static 'js/global.js' %}"></script>
+	{% block local_js %}
+	{% endblock %}
+
+
+</body>
+
+</html>

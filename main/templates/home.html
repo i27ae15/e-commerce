@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block local_css %}
+
+<style>
+
+	.a_main_content{
+		padding: 2% 7%;
+	}
+
+	.buy_bt, .seemore_bt, .seemore{
+		color: white;
+	}
+
+	.more_bt{
+		color: #0a0506;
+	}
+
+	.more_bt:hover{
+		color: #0a0506;
+	}
+
+</style>
+
+{% endblock %}
+
+{% block carousel %}
+<div class="banner_section">
+	<div class="container-fluid">
+		<section class="slide-wrapper">
+			<div class="container-fluid">
+				<div id="myCarousel" class="carousel slide" data-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<div class="row">
+								<div class="col-sm-2 padding_0">
+									<p class="mens_taital">Men Shoes</p>
+									<div class="page_no">0/2</div>
+									<p class="mens_taital_2">Men Shoes</p>
+								</div>
+								<div class="col-sm-5">
+									<div class="banner_taital">
+										<h1 class="banner_text">New Running Shoes </h1>
+										<h1 class="mens_text"><strong>Men's Like Plex</strong></h1>
+										<p class="lorem_text">ipsum dolor sit amet, consectetur adipiscing elit,
+											sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+										</p>
+										<a class="buy_bt a_main_content" href="shoes/shoe4">Buy now</a>
+										<a class="more_bt a_main_content" href="{% url 'shoes' %}">See More</a>
+									</div>
+								</div>
+								<div class="col-sm-5">
+									<div class="shoes_img"><img src="{% static 'images/running-shoes.png' %}"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>
+{% endblock %}
+<!-- header section end -->
+{% csrf_token %}
+
+{% block main %}
+<div class="layout_padding collection_section">
+	<div class="container">
+		<h1 class="new_text"><strong>New Collection</strong></h1>
+		<p class="consectetur_text">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+			dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+		<div class="collection_section_2">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="about-img">
+						<button class="new_bt">New</button>
+						<a href="shoes/shoe6">
+						<div class="shoes-img"><img src="{% static 'images/shoes-img1.png' %}"></div>
+						</a>
+						<p class="sport_text">Men Sports</p>
+						<div class="dolar_text">$<strong style="color: #f12a47;">149.99</strong> </div>
+						<div class="star_icon">
+							<ul>
+								<li><img src="{% static 'images/star-icon.png' %}"></li>
+								<li><img src="{% static 'images/star-icon.png' %}"></li>
+								<li><img src="{% static 'images/star-icon.png' %}"></li>
+								<li><img src="{% static 'images/star-icon.png' %}"></li>
+								<li><img src="{% static 'images/star-icon.png' %}"></li>
+							</ul>
+						</div>
+					</div>
+					<button class="seemore_bt a_main_content"><a href="{% url 'shoes' %}" style="color: white;">See More</a></button>
+				</div>
+				<div class="col-md-6">
+					<div class="about-img2">
+						<a href="shoes/shoe6">
+						<div class="shoes-img2"><img src="{% static 'images/shoes-img2.png' %}"></div>
+						</a>
+						<p class="sport_text">Men Sports</p>
+						<div class="dolar_text">$<strong style="color: #f12a47;">149.99</strong> </div>
+						<div class="star_icon">
+							<ul>
+								<li><img src="{% static 'images/star-icon.png' %}"></li>
+								<li><img src="{% static 'images/star-icon.png' %}"></li>
+								<li><img src="{% static 'images/star-icon.png' %}"></li>
+								<li><img src="{% static 'images/star-icon.png' %}"></li>
+								<li><img src="{% static 'images/star-icon.png' %}"></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="collection_section">
+	<div class="container">
+		<h1 class="new_text"><strong>Racing Boots</strong></h1>
+		<p class="consectetur_text">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+			dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+	</div>
+</div>
+
+<div class="collectipn_section_3 layuot_padding">
+	<div class="container">
+		<div class="racing_shoes">
+			<div class="row">
+				<div class="col-md-8">
+					<div class="shoes-img3"><img src="{% static 'images/shoes-img3.png' %}"></div>
+				</div>
+				<div class="col-md-4">
+					<div class="sale_text"><strong>Sale <br><span style="color: #0a0506;">JOGING</span>
+							<br>SHOES</strong></div>
+					<div class="number_text"><strong>$ <span style="color: #0a0506">99.99</span></strong></div>
+					<button class="seemore a_main_content"><a href="shoes/shoe8">Buy Now</a></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="collection_section layout_padding">
+	<div class="container">
+		<h1 class="new_text"><strong>New Arrivals Products</strong></h1>
+		<p class="consectetur_text">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+			dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+	</div>
+</div>
+
+<div class="layout_padding gallery_section">
+	<div class="container">
+		<div class="row" id="shoes-section">
+
+		</div>
+		<div class="row">
+		</div>
+		<div class="buy_now_bt">
+			<a class="buy_text a_main_content" href="{% url 'shoes' %}">See More</a>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+
+{% block local_js %}
+
+<script src="{% static 'js/main.js' %}">
+</script>
+
+{% endblock %}
+
+</body>
+
+</html>

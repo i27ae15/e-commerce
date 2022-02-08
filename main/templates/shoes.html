@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- header section start -->
+<!-- New Arrivals section start -->
+{% block main %}
+
+{% if query is None %}
+<div class="collection_text">Shoes</div>
+
+<div class="collection_section layout_padding">
+	<div class="container">
+		<h1 class="new_text"><strong>New Arrivals Products</strong></h1>
+		<p class="consectetur_text">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+			dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+	</div>
+</div>
+
+{% else %}
+<p id="query-search">{{query}}</p>
+<div class="collection_text">Search for: "{{query}}"</div>
+{% csrf_token %}
+{% endif %}
+
+<div class="layout_padding gallery_section">
+	<div class="container">
+		<div class="row" id="shoes-section">
+			
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block local_js %}
+
+<script src="{% static 'js/main.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+
+<div class="collection_text" id="product-name">{{product_name.capitalize}}</div>
+<div class="about_main layout_padding">
+    <div class="collection_section">
+        <div class="container">
+            <p class="consectetur_text" id="product-description" style="margin: 0;"></p>
+        </div>
+    </div>
+    <div class="collectipn_section_3 layout_padding">
+        <div class="container">
+            <div class="racing_shoes">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="shoes-img3"><img src="images/shoes-img3.png" id="product-image"></div>
+                    </div>
+                    <div class="col-md-4" style="text-align: center;">
+                        <div class="number_text"><strong>$ <span style="color: #0a0506"
+                                    id="product-price"></span></strong></div>
+
+                        {% if user.is_authenticated %}
+
+                            {% csrf_token %}
+                            <input type="number" min="0" value="1" id="product-quantity"
+                                style="display: inline; width: 60px; height: 50px; font-size: 25px;">
+
+                            <button class="seemore" id="submit-btn">Add to cart</button>
+
+                        {% else %}
+
+                        <a href="{% url 'login' %}" class="seemore" style="padding: 2% 7%; color: white;">Log in to add
+                            to cart</a>
+
+
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block local_js %}
+
+<script defer>
+    let productName = $('#product-name').html()
+    $('#current-section').remove()
+    let url = `http://localhost:8000/api/v1/products/shoes/${productName.toLowerCase()}/`
+    $.ajax({
+
+        url: url,
+        dataType: "json",
+        type: "Get",
+        async: true,
+        data: {},
+        success: function (data) {
+
+            $('#product-description').text(data.description);
+            $('#product-image').attr('src', data.get_thumbnail);
+            $('#product-price').text(data.price);
+
+        },
+        error: function (xhr, exception) {
+            let msg = "";
+            if (xhr.status === 0) {
+                msg = "Not connect.\n Verify Network." + xhr.responseText;
+            } else if (xhr.status == 404) {
+                msg = "Requested page not found. [404]" + xhr.responseText;
+            } else if (xhr.status == 500) {
+                msg = "Internal Server Error [500]." + xhr.responseText;
+            } else if (exception === "parsererror") {
+                msg = "Requested JSON parse failed.";
+            } else if (exception === "timeout") {
+                msg = "Time out error." + xhr.responseText;
+            } else if (exception === "abort") {
+                msg = "Ajax request aborted.";
+            } else {
+                msg = "Error:" + xhr.status + " " + xhr.responseText;
+            }
+
+            console.log(msg)
+
+        }
+    });
+
+    $("#submit-btn").click(function () {
+
+        data = {
+            "price": $("#product-price").text(),
+            "product": "{{product_name}}",
+            "quantity": $("#product-quantity").val(),
+            "csrfmiddlewaretoken": $("input[name=csrfmiddlewaretoken]").val()
+        }
+
+        $.ajax({
+            url: "{% url 'add_to_cart' %}",
+            dataType: "json",
+            type: "Post",
+            async: true,
+            data: data,
+            success: function (data) {
+                console.log(data)
+            },
+            error: function (xhr, exception) {
+                let msg = "";
+                if (xhr.status === 0) {
+                    msg = "Not connect.\n Verify Network." + xhr.responseText;
+                } else if (xhr.status == 404) {
+                    msg = "Requested page not found. [404]" + xhr.responseText;
+                } else if (xhr.status == 500) {
+                    msg = "Internal Server Error [500]." + xhr.responseText;
+                } else if (exception === "parsererror") {
+                    msg = "Requested JSON parse failed.";
+                } else if (exception === "timeout") {
+                    msg = "Time out error." + xhr.responseText;
+                } else if (exception === "abort") {
+                    msg = "Ajax request aborted.";
+                } else {
+                    msg = "Error:" + xhr.status + " " + xhr.responseText;
+                }
+
+                console.log(msg)
+
+            }
+        });
+
+    });
+</script>
+
+{% endblock %}

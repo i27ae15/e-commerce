@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block local_css %}
+
+<style>
+
+  #body a{
+    color: crimson;
+  }
+
+  #body a:hover{
+    color: crimson;
+  }
+
+</style>
+
+{% endblock %}
+
+
+{% block main %}
+
+<div class="collection_text" id="total">Total: $0</div>
+
+<div style="margin-bottom: 10%">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+        <th scope="col">Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price per unit</th>
+        <th scope="col">Total</th>
+      </tr>
+    </thead>
+    <tbody id="body">
+      
+    </tbody>
+  </table>
+</div>
+
+
+{% endblock %}
+
+{% block local_js %}
+
+<script>
+  let totalToPay = 0;
+  let totalPerUnit = 0;
+
+  $.ajax({
+
+    url: "{% url 'GetCartItems' %}",
+    dataType: "json",
+    type: "Get",
+    async: true,
+    data: {},
+    success: function (data) {
+
+      for (let n = 0; n < data.length; n++){
+
+        totalPerUnit = data[n].price * data[n].quantity;
+        totalToPay += totalPerUnit;
+
+        $('tbody').append(`
+      
+        <tr>
+          <th>Shoe</th>
+          <td> <a href=shoes/${data[n].product}>${data[n].product}</a></td>
+          <td>${data[n].quantity}</td>
+          <td>$${data[n].price}</td>
+          <td>$${totalPerUnit}</td>
+        </tr>
+
+      `)
+      totalPerUnit = 0;
+      }
+
+      $('#total').html(`Total: $${totalToPay}`);
+
+    },
+    error: function (xhr, exception) {
+      let msg = "";
+      if (xhr.status === 0) {
+        msg = "Not connect.\n Verify Network." + xhr.responseText;
+      } else if (xhr.status == 404) {
+        msg = "Requested page not found. [404]" + xhr.responseText;
+      } else if (xhr.status == 500) {
+        msg = "Internal Server Error [500]." + xhr.responseText;
+      } else if (exception === "parsererror") {
+        msg = "Requested JSON parse failed.";
+      } else if (exception === "timeout") {
+        msg = "Time out error." + xhr.responseText;
+      } else if (exception === "abort") {
+        msg = "Ajax request aborted.";
+      } else {
+        msg = "Error:" + xhr.status + " " + xhr.responseText;
+      }
+
+      console.log(msg)
+
+    }
+  });
+</script>
+
+{% endblock %}

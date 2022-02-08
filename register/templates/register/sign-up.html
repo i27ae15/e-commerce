@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<style>
+    p {
+        color: white;
+    }
+</style>
+
+
+<!-- contact section start -->
+<div class="collection_text" style="margin-bottom: 10%;">Sign up</div>
+<div class="container" style="margin-bottom: 10%">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="email_box">
+                <div class="input_main">
+                    <div class="container">
+                        <form role="form" method="post" action="">
+                            {% load crispy_forms_tags %}
+
+                            {% csrf_token %}
+                            {{form|crispy}}
+                           
+                            <div class="send_btn">
+                                <button class="main_bt" type="submit" id="submit">Sign up</button>
+                            </div>
+                            <a style="padding: 1%; color: white;" href="{% url 'login' %}">Already have an account? Log in</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
