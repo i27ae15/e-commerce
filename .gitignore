@@ -169,11 +169,9 @@ cython_debug/
 *.sqlite3
 .idea/
 # Project asset folders
-media/
 # Database
 db.sqlite3
 # Editor directories and files
 .idea
-# uploads/
 # staticfiles/
 
