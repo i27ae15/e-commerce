@@ -50,7 +50,7 @@
 <script defer>
     let productName = $('#product-name').html()
     $('#current-section').remove()
-    let url = `http://localhost:8000/api/v1/products/shoes/${productName.toLowerCase()}/`
+    let url = `https://e-commerce-destiny.herokuapp.com/api/v1/products/shoes/${productName.toLowerCase()}/`
     $.ajax({
 
         url: url,
